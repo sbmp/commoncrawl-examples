@@ -36,6 +36,7 @@ import org.apache.hadoop.mapred.lib.LongSumReducer;
 import org.apache.hadoop.util.Progressable;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
+import org.tartarus.snowball
 
 /**
  * An example showing how to use the Common Crawl 'textData' files to efficiently
@@ -62,6 +63,9 @@ public class ExampleTextWordCount extends Configured implements Tool {
 
       reporter.incrCounter(this._counterGroup, "Records In", 1);
 
+      Class stemClass = Class.forName("org.tartarus.snowball.ext.englishStemmer");
+      SnowballStemmer stemmer = (SnowballStemmer) stemClass.newInstance();
+
       try {
 
         // Get the text content as a string.
@@ -79,7 +83,8 @@ public class ExampleTextWordCount extends Configured implements Tool {
 
         // Splits by space and outputs to OutputCollector.
         for (String word : pageText.split(" ")) {
-          output.collect(new Text(word.toLowerCase()), new LongWritable(1));
+          String stemmedWord = stemmer.stem(word.toLowerCase());
+          output.collect(new Text(stemmedWord, new LongWritable(1));
         }
       }
       catch (Exception ex) {
