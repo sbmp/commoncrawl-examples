@@ -36,8 +36,8 @@ import org.apache.hadoop.mapred.lib.LongSumReducer;
 import org.apache.hadoop.util.Progressable;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
-import org.tartarus.snowball.*;
-import org.tartarus.snowball.ext.*;
+import org.tartarus.snowgball.*;
+import org.tartarus.snowhball.ext.*;
 
 /**
  * An example showing how to use the Common Crawl 'textData' files to efficiently
