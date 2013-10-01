@@ -40,7 +40,7 @@ import org.apache.hadoop.util.ToolRunner;
 /**
  * An example showing how to use the Common Crawl 'textData' files to efficiently
  * work with Common Crawl corpus text content.
- * 
+ *
  * @author Chris Stephens <chris@commoncrawl.org>
  */
 public class ExampleTextWordCount extends Configured implements Tool {
@@ -51,7 +51,7 @@ public class ExampleTextWordCount extends Configured implements Tool {
    * Perform a simple word count mapping on text data from the Common Crawl corpus.
    */
   public static class ExampleTextWordCountMapper
-      extends    MapReduceBase 
+      extends    MapReduceBase
       implements Mapper<Text, Text, Text, LongWritable> {
 
     // create a counter group for Mapper-specific statistics
@@ -119,8 +119,8 @@ public class ExampleTextWordCount extends Configured implements Tool {
    * Implmentation of Tool.run() method, which builds and runs the Hadoop job.
    *
    * @param  args command line parameters, less common Hadoop job parameters stripped
-   *              out and interpreted by the Tool class.  
-   * @return      0 if the Hadoop job completes successfully, 1 if not. 
+   *              out and interpreted by the Tool class.
+   * @return      0 if the Hadoop job completes successfully, 1 if not.
    */
   @Override
   public int run(String[] args)
@@ -139,10 +139,10 @@ public class ExampleTextWordCount extends Configured implements Tool {
       configFile = args[1];
 
     // For this example, only look at a single text file.
-    String inputPath = "s3n://aws-publicdatasets/common-crawl/parse-output/segment/1341690166822/textData-01666";
- 
+    //String inputPath = "s3n://aws-publicdatasets/common-crawl/parse-output/segment/1341690166822/textData-01666";
+
     // Switch to this if you'd like to look at all text files.  May take many minutes just to read the file listing.
-  //String inputPath = "s3n://aws-publicdatasets/common-crawl/parse-output/segment/*/textData-*";
+  String inputPath = "s3n://aws-publicdatasets/common-crawl/parse-output/segment/*/textData-*";
 
     // Read in any additional config parameters.
     if (configFile != null) {
