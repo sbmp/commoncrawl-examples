@@ -84,7 +84,7 @@ public class ExampleTextWordCount extends Configured implements Tool {
         // Splits by space and outputs to OutputCollector.
         for (String word : pageText.split(" ")) {
           String stemmedWord = stemmer.stem(word.toLowerCase());
-          output.collect(new Text(stemmedWord, new LongWritable(1));
+          output.collect(new Text(stemmedWord, new LongWritable(1)));
         }
       }
       catch (Exception ex) {
