@@ -84,7 +84,8 @@ public class StemmedTextWordCount extends Configured implements Tool {
         // Splits by space and outputs to OutputCollector.
         for (String word : pageText.split(" ")) {
           stemmer.setCurrent(word.toLowerCase());
-          output.collect(new Text(stemmer.stem(), new LongWritable(1)));
+          stemmer.stem()
+          output.collect(new Text(stemmer.getCurrent(), new LongWritable(1)));
         }
       }
       catch (Exception ex) {
