@@ -44,14 +44,14 @@ import org.tartarus.snowball;
  *
  * @author Chris Stephens <chris@commoncrawl.org>
  */
-public class ExampleTextWordCount extends Configured implements Tool {
+public class StemmedTextWordCount extends Configured implements Tool {
 
-  private static final Logger LOG = Logger.getLogger(ExampleTextWordCount.class);
+  private static final Logger LOG = Logger.getLogger(StemmedTextWordCount.class);
 
   /**
    * Perform a simple word count mapping on text data from the Common Crawl corpus.
    */
-  public static class ExampleTextWordCountMapper
+  public static class StemmedTextWordCountMapper
       extends    MapReduceBase
       implements Mapper<Text, Text, Text, LongWritable> {
 
@@ -136,7 +136,7 @@ public class ExampleTextWordCount extends Configured implements Tool {
 
     // Read the command line arguments.
     if (args.length <  1)
-      throw new IllegalArgumentException("Example JAR must be passed an output path.");
+      throw new IllegalArgumentException("Stemmed JAR must be passed an output path.");
 
     outputPath = args[0];
 
@@ -158,7 +158,7 @@ public class ExampleTextWordCount extends Configured implements Tool {
     // Creates a new job configuration for this Hadoop job.
     JobConf job = new JobConf(this.getConf());
 
-    job.setJarByClass(ExampleTextWordCount.class);
+    job.setJarByClass(StemmedTextWordCount.class);
 
     // Scan the provided input path for ARC files.
     LOG.info("setting input path to '"+ inputPath + "'");
@@ -189,7 +189,7 @@ public class ExampleTextWordCount extends Configured implements Tool {
     job.setOutputValueClass(LongWritable.class);
 
     // Set which Mapper and Reducer classes to use.
-    job.setMapperClass(ExampleTextWordCount.ExampleTextWordCountMapper.class);
+    job.setMapperClass(StemmedTextWordCount.StemmedTextWordCountMapper.class);
     job.setReducerClass(LongSumReducer.class);
 
     if (JobClient.runJob(job).isSuccessful())
@@ -204,7 +204,7 @@ public class ExampleTextWordCount extends Configured implements Tool {
    */
   public static void main(String[] args)
       throws Exception {
-    int res = ToolRunner.run(new Configuration(), new ExampleTextWordCount(), args);
+    int res = ToolRunner.run(new Configuration(), new StemmedTextWordCount(), args);
     System.exit(res);
   }
 }
