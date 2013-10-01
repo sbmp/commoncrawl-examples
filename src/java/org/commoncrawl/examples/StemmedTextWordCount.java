@@ -64,7 +64,8 @@ public class StemmedTextWordCount extends Configured implements Tool {
 
       reporter.incrCounter(this._counterGroup, "Records In", 1);
 
-      englishStemmer stemmer = englishStemmer.newInstance();
+      Class stemClass = Class.forName("org.tartarus.snowball.ext.englishStemmer");
+      SnowballStemmer stemmer = (SnowballStemmer) stemClass.newInstance();
 
       try {
 
